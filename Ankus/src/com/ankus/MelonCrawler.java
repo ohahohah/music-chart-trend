@@ -54,6 +54,7 @@ public class MelonCrawler {
 					System.out.println("2011-0"+page+"-"+flag);
 					flag++;
 				}
+
 				page++;
 			}
 			fw.flush();
