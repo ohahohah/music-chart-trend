@@ -16,46 +16,40 @@ import org.jsoup.select.Elements;
 public class MelonCrawler {
 	public static void main(String[] args){
 		try {
-			final String url = "http://www.mnet.com/chart/TOP100/2011";
+			final String url = "http://www.melon.com/genre/song_list.htm?gnrCode=GN0100#params%5BgnrCode%5D=GN0100&params%5BdtlGnrCode%5D=&params%5BorderBy%5D=NEW&params%5BsteadyYn%5D=N&po=pageObj&startIndex=";
 			final int ok = 200;
 			String currentURL;
-			int page = 801;
-			int flag =1;
+			int startNum = 51;
 			int status = ok;
 			Connection.Response response = null;
 			Document doc = null;
-			String fileName = "D:\\mnetchart.txt";
+			String fileName = "D:\\melonchart.txt";
 			String information = "";
 			File file = new File(fileName);
 			FileWriter fw = new FileWriter(file,true);
-			while(status ==ok&&page<830){
-				flag=1;
-				while(flag!=3){
-					currentURL=url+String.format("%04d",page)+"00?pNum="+String.format("%d", flag);
+			while(status ==ok&&startNum<100){
 				
-					response = Jsoup.connect(currentURL).timeout(10*5000)
-							.userAgent("Mozilla/5.0")
-							.execute();
-					status = response.statusCode();
-					if(status==ok){
-						doc = response.parse();
-						Elements main = doc.select("div.fix").select("div#content").select("div.MnetMusicList").select("div.MMLTable");//
-						Boolean lml = main.select("div.MMLITitleSong_Box").first().getElementsByTag("a").isEmpty();
-						if( lml!=true){
-							for(int p=0;p<50;p++){
-								information += (p+1+(flag-1)*50)+"#"+"2011"+String.format("%04d",page)+"#"+main.select("div.MMLITitleSong_Box").get(p).select("a.MMLI_Song").text()+"#"+
-												main.select("div.MMLITitle_Info").get(p).select("a.MMLIInfo_Artist").text()+"#"+
-												main.select("div.MMLITitle_Info").get(p).select("a.MMLIInfo_Album").text()+"\r\n";
-							}
-							fw.write(information);
-							information="";
-						}	
-					}
-					System.out.println("2011-0"+page+"-"+flag);
-					flag++;
+				currentURL=url+String.format("%d",startNum);
+				response = Jsoup.connect(currentURL).timeout(10*5000)
+						.userAgent("Mozilla/5.0")
+						.execute();
+				status = response.statusCode();
+				if(status==ok){
+					doc = response.parse();
+					Elements main = doc.select("div#songList").select("div.service_list_song");//
+					Boolean lml = main.select("div.wrap_song_info").first().getElementsByTag("a").isEmpty();
+					if( lml!=true){
+						for(int p=0;p<50;p++){
+							information += "Ballade"+"#"+main.select("div.wrap_song_info").select("div.ellipsis.rank01").get(p).text()+"#"+
+									main.select("div.wrap_song_info").select("div.ellipsis.rank02").select("span.checkEllipsis").get(p).text()+"#"+
+									main.select("div.wrap_song_info").select("div.ellipsis.rank03").get(p).text()+"\r\n";
+						}
+						fw.write(information);
+						information="";
+					}	
 				}
-
-				page++;
+				System.out.println(startNum);
+				startNum = startNum + 50;
 			}
 			fw.flush();
 			fw.close();
