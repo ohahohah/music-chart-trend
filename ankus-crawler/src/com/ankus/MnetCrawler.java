@@ -52,7 +52,7 @@ public class MnetCrawler {
 							information="";
 						}	
 					}
-					System.out.println(year+"-0"+page+"-"+flag);
+					System.out.println(year+"-"+page+"-"+flag);
 					flag++;
 				}
 				page++;

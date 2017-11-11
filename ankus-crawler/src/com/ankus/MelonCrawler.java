@@ -16,13 +16,16 @@ import org.jsoup.select.Elements;
 public class MelonCrawler {
 	public static void main(String[] args){
 		try {
-			final String url_1 = "http://www.melon.com/genre/song_list.htm?gnrCode=GN0100#params%5BgnrCode%5D=GN0100&params%5BdtlGnrCode%5D=&params%5BorderBy%5D=NEW&params%5BsteadyYn%5D=N&po=pageObj&startIndex=";
-			//final String url_2 = "http://www.melon.com/genre/song_list.htm?gnrCode=GN0100#params%5BgnrCode%5D=GN0100&params%5BdtlGnrCode%5D=&params%5BorderBy%5D=NEW&params%5BsteadyYn%5D=N&po=pageObj&startIndex=";
-			
+			final String url_1 = "http://www.melon.com/genre/song_listPaging.htm?startIndex=";
+			final String url_2 = "&pageSize=50&gnrCode=GN";
+			final String url_3 = "&dtlGnrCode=&orderBy=NEW&steadyYn=N";
 			final int ok = 200;
 			String currentURL;
-			int startNum = 51;
-			//int ganre = 100;
+			int startnum = 1;
+			int ganrenum = 100;
+			// ballade 26451
+			String[] Ganre = { "Ballade","Dance","Rap/Hiphop","R&B/Soul","Indie","Rock/Metal","Trot","Folk/Blues"};
+			int[] Ganrecount = {26451,9951,14151,4501,14551,14401,16251,6951};
 			int status = ok;
 			Connection.Response response = null;
 			Document doc = null;
@@ -30,34 +33,39 @@ public class MelonCrawler {
 			String information = "";
 			File file = new File(fileName);
 			FileWriter fw = new FileWriter(file,true);
-			while(status ==ok&&startNum<100){
+			while(status ==ok&&(ganrenum!=900)){
 				
-				currentURL=url_1+String.format("%d",startNum);
+				currentURL=url_1+String.format("%d", startnum)+url_2+String.format("%04d",ganrenum)+url_3;
 				response = Jsoup.connect(currentURL).timeout(10*5000)
 						.userAgent("Mozilla/5.0")
 						.execute();
 				status = response.statusCode();
 				if(status==ok){
 					doc = response.parse();
-					Elements main = doc.select("div#songList").select("div.service_list_song");//
+					Elements main = doc.select("div.service_list_song");
 					Boolean lml = main.select("div.wrap_song_info").first().getElementsByTag("a").isEmpty();
 					if( lml!=true){
 						for(int p=0;p<50;p++){
-							information += "Ballade"+"#"+main.select("div.wrap_song_info").select("div.ellipsis.rank01").get(p).text()+"#"+
+							information += Ganre[ganrenum/100-1]+"#"+main.select("div.wrap_song_info").select("div.ellipsis.rank01").get(p).text()+"#"+
 									main.select("div.wrap_song_info").select("div.ellipsis.rank02").select("span.checkEllipsis").get(p).text()+"#"+
 									main.select("div.wrap_song_info").select("div.ellipsis.rank03").get(p).text()+"\r\n";
 						}
 						fw.write(information);
 						information="";
-					}	
+					}
+					System.out.println(startnum);
+					if(startnum==Ganrecount[ganrenum/100-1]){
+						ganrenum = ganrenum + 100;
+						startnum = 1;
+					}else{
+						startnum = startnum + 50;
+					}
 				}
-				System.out.println(startNum);
-				startNum = startNum + 50;
+				
 			}
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
