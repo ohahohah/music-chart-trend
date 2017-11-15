@@ -16,8 +16,8 @@ public class MnetMapper extends
     throws IOException, InterruptedException {
 
     MnetInfoParser parser = new MnetInfoParser(value);
-    outputKey.set(parser.getcategorycode());
-    outValue.set(parser.getsize()+"#"+parser.getsex());
+    outputKey.set(parser.getdate()+parser.getsong()+parser.getsinger());
+    outValue.set(parser.getrank()+"#"+parser.getalbum());
     context.write(outputKey, outValue);
     
   }

@@ -8,28 +8,26 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class TaggedKey implements WritableComparable<TaggedKey> {
-  // ?ï≠Í≥µÏÇ¨ ÏΩîÎìú
-  private String carrierCode;
-  // Ï°∞Ïù∏ ?ÖåÍ∑?
+  private String Code;
   private Integer tag;
 
   public TaggedKey() {}
 
-  public TaggedKey(String carrierCode, int tag) {
-    this.carrierCode = carrierCode;
+  public TaggedKey(String Code, int tag) {
+    this.Code = Code;
     this.tag = tag;
   }
 
-  public String getCarrierCode() {
-    return carrierCode;
+  public String getCode() {
+    return Code;
   }
 
   public Integer getTag() {
     return tag;
   }
 
-  public void setCarrierCode(String carrierCode) {
-    this.carrierCode = carrierCode;
+  public void setCode(String Code) {
+    this.Code = Code;
   }
 
   public void setTag(Integer tag) {
@@ -37,7 +35,7 @@ public class TaggedKey implements WritableComparable<TaggedKey> {
   }
 
   public int compareTo(TaggedKey key) {
-    int result = this.carrierCode.compareTo(key.carrierCode);
+    int result = this.Code.compareTo(key.Code);
 
     if (result == 0) {
       return  this.tag.compareTo(key.tag);
@@ -47,12 +45,12 @@ public class TaggedKey implements WritableComparable<TaggedKey> {
   }
 
   public void write(DataOutput out) throws IOException {
-    WritableUtils.writeString(out, carrierCode);
+    WritableUtils.writeString(out, Code);
     out.writeInt(tag);
   }
 
   public void readFields(DataInput in) throws IOException {
-    carrierCode = WritableUtils.readString(in);
+	  Code = WritableUtils.readString(in);
     tag = in.readInt();
   }
 }

@@ -4,36 +4,32 @@ package com.ankus;
 import org.apache.hadoop.io.Text;
 
 public class MnetInfoParser {
-	private String category;
-	private String categorycode;
-	private String size;
-	private String sex;
+	private String rank;
+	private String date;
+	private String song;
+	private String singer;
+	private String album;
+	//private String ganre;
+	//private String sell;
 
   public MnetInfoParser(Text text) {
     try {
       String[] colums = text.toString().trim().split("#");
       if (colums != null && colums.length > 0) {
-      
-      categorycode = colums[1];
-      
-      
-    	  if (colums[3].equalsIgnoreCase("1")){
-    		  size = "7";
-    	  }else if(colums[3].equalsIgnoreCase("2")){
-    		  size = "20";
-    	  }
-      
-      sex = colums[4];
-      
+    	  rank = colums[0];
+    	  date = colums[1];
+    	  song = colums[2];
+    	  singer = colums[3];
+    	  album = colums[4];
       }
     } catch (Exception e) {
       System.out.println("Error parsing a record :" + e.getMessage());
     }
   }
-  public String getcategorycode(){return categorycode;}
-  public String getcategory() { return category; }
-  public String getsex() { return sex;}
-  public String getsize() { return size;}
-  
+  public String getrank(){return rank;}
+  public String getdate() { return date; }
+  public String getsong() { return song;}
+  public String getsinger() { return singer;}
+  public String getalbum() { return album;}
   
 }

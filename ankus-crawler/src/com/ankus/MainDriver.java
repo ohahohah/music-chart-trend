@@ -14,7 +14,6 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import com.ankus.TaggedGroupKeyComparator;
 
 
 public class MainDriver extends Configured implements Tool {
@@ -48,8 +47,7 @@ public class MainDriver extends Configured implements Tool {
 	    
 			FileOutputFormat.setOutputPath(job1, new Path(MNET_OUTPUT));
 
-	    
-	    
+			
 			
 			//job1.setReducerClass(TaxReducer.class);
 	    

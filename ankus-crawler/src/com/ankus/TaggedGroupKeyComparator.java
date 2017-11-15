@@ -15,7 +15,6 @@ public class TaggedGroupKeyComparator extends WritableComparator {
     TaggedKey k1 = (TaggedKey) w1;
     TaggedKey k2 = (TaggedKey) w2;
 
-    // ê·¸ë£¹?‚¤?¸ ?•­ê³µì‚¬ ì½”ë“œê°? ? •? ¬
-    return k1.getCarrierCode().compareTo(k2.getCarrierCode());
+    return k1.getCode().compareTo(k2.getCode());
   }
 }
