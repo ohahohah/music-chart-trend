@@ -25,7 +25,7 @@ public class MnetCrawler {
 			int status = ok;
 			Connection.Response response = null;
 			Document doc = null;
-			String fileName = "D:\\mnetchart.txt";
+			String fileName = "D:\\mnetchart2.txt";
 			String information = "";
 			File file = new File(fileName);
 			FileWriter fw = new FileWriter(file,true);
@@ -44,8 +44,8 @@ public class MnetCrawler {
 						Boolean lml = main.select("div.MMLITitleSong_Box").first().getElementsByTag("a").isEmpty();
 						if( lml!=true){
 							for(int p=0;p<50;p++){
-								information += (p+1+(flag-1)*50)+"#"+year+String.format("%04d",page)+"#"+main.select("div.MMLITitleSong_Box").get(p).select("a.MMLI_Song").text()+"#"+
-												main.select("div.MMLITitle_Info").get(p).select("a.MMLIInfo_Artist").text()+"#"+
+								information += (p+1+(flag-1)*50)+"¤Â"+year+String.format("%04d",page)+"¤Â"+main.select("div.MMLITitleSong_Box").get(p).select("a.MMLI_Song").text()+"¤Â"+
+												main.select("div.MMLITitle_Info").get(p).select("a.MMLIInfo_Artist").text()+"¤Â"+
 												main.select("div.MMLITitle_Info").get(p).select("a.MMLIInfo_Album").text()+"\r\n";
 							}
 							fw.write(information);
@@ -64,6 +64,9 @@ public class MnetCrawler {
 					}else{
 						page = ((page/100)+1)*100+1;
 					}
+				}
+				if(year==2017&&page==1111){
+					break;
 				}
 			}
 			fw.flush();

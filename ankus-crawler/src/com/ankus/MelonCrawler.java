@@ -29,7 +29,7 @@ public class MelonCrawler {
 			int status = ok;
 			Connection.Response response = null;
 			Document doc = null;
-			String fileName = "D:\\melonchart.txt";
+			String fileName = "D:\\melonchart2.txt";
 			String information = "";
 			File file = new File(fileName);
 			FileWriter fw = new FileWriter(file,true);
@@ -46,8 +46,8 @@ public class MelonCrawler {
 					Boolean lml = main.select("div.wrap_song_info").first().getElementsByTag("a").isEmpty();
 					if( lml!=true){
 						for(int p=0;p<50;p++){
-							information += Ganre[ganrenum/100-1]+"#"+main.select("div.wrap_song_info").select("div.ellipsis.rank01").get(p).text()+"#"+
-									main.select("div.wrap_song_info").select("div.ellipsis.rank02").select("span.checkEllipsis").get(p).text()+"#"+
+							information += Ganre[ganrenum/100-1]+"¤Â"+main.select("div.wrap_song_info").select("div.ellipsis.rank01").get(p).text()+"¤Â"+
+									main.select("div.wrap_song_info").select("div.ellipsis.rank02").select("span.checkEllipsis").get(p).text()+"¤Â"+
 									main.select("div.wrap_song_info").select("div.ellipsis.rank03").get(p).text()+"\r\n";
 						}
 						fw.write(information);

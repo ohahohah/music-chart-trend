@@ -26,7 +26,7 @@ public class GaonCrawler {
 			int status = ok;
 			Connection.Response response = null;
 			Document doc = null;
-			String fileName = "D:\\gaonchart.txt";
+			String fileName = "D:\\gaonchart3.txt";
 			String information = "";
 			File file = new File(fileName);
 			FileWriter fw = new FileWriter(file,true);
@@ -42,8 +42,8 @@ public class GaonCrawler {
 					Boolean lml = main.select("td.subject").first().getElementsByTag("p").isEmpty();
 					if( lml!=true){
 						for(int p=0;p<100;p++){
-							information += (p+1)+"#"+main.select("td.subject").get(p).getElementsByTag("p").get(0).text()+"#"+
-									main.select("td.subject").get(p).getElementsByTag("p").get(1).text()+"#"+
+							information += (p+1)+"¤Â"+main.select("td.subject").get(p).getElementsByTag("p").get(0).text()+"¤Â"+
+									main.select("td.subject").get(p).getElementsByTag("p").get(1).text()+"¤Â"+
 									main.select("td.count").get(p).getElementsByTag("p").text()+"\r\n";
 						}
 						fw.write(information);
