@@ -7,7 +7,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class MnetMapper extends
+public class InterMapper extends
   Mapper<LongWritable, Text, Text, Text> {
 
   // map 출력값
@@ -17,12 +17,11 @@ public class MnetMapper extends
   public void map(LongWritable key, Text value, Context context)
     throws IOException, InterruptedException {
 
-    MnetParser parser = new MnetParser(value);
+    InterParser parser = new InterParser(value);
 
     // 출력키 설정
-    if(parser.getsong()!=null){
-    	outputKey.set(parser.getsong()+"ㅒ"+parser.getsinger()+"ㅒ"+parser.getalbum()+"ㅒ");
-    	outputValue.set(parser.getdate()+"ㅒ"+parser.getrank());
+    if(parser.getalbum()!=null){
+    	outputKey.set(parser.getalbum());
       context.write(outputKey, outputValue);
     	}
   }
