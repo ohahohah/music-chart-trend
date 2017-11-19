@@ -1,9 +1,19 @@
-package com.song;
+package com.ankus;
 
 import java.util.HashMap;
 
 import org.apache.hadoop.io.Text;
 
+
+/**
+* <pre>
+* 1. 패키지명 : com.ankus
+* 2. 타입명 : InterParser.java
+* 3. 작성일 : 2017. 11. 20. 오전 1:25:53
+* 4. 작성자 : mypc
+* 5. 설명 : 중간 파싱
+* </pre>
+*/
 public class InterParser {
 	private String album;
 	private String singer;

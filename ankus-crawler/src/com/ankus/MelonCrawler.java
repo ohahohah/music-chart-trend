@@ -9,10 +9,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-/* 
-		Melon Site Crawling
-*/
 
+/**
+* <pre>
+* 1. 패키지명 : com.ankus
+* 2. 타입명 : MelonCrawler.java
+* 3. 작성일 : 2017. 11. 20. 오전 1:26:03
+* 4. 작성자 : mypc
+* 5. 설명 : 멜론 사이트 크롤러
+* </pre>
+*/
 public class MelonCrawler {
 	public static void main(String[] args){
 		try {
@@ -23,12 +29,13 @@ public class MelonCrawler {
 			String currentURL;
 			int startnum = 1;
 			int ganrenum = 100;
-			// ballade 26451
 			String[] Ganre = { "Ballade","Dance","Rap/Hiphop","R&B/Soul","Indie","Rock/Metal","Trot","Folk/Blues"};
 			int[] Ganrecount = {26451,9951,14151,4501,14551,14401,16251,6951};
 			int status = ok;
 			Connection.Response response = null;
 			Document doc = null;
+			
+			// change file route
 			String fileName = "D:\\melonchart2.txt";
 			String information = "";
 			File file = new File(fileName);
@@ -46,8 +53,8 @@ public class MelonCrawler {
 					Boolean lml = main.select("div.wrap_song_info").first().getElementsByTag("a").isEmpty();
 					if( lml!=true){
 						for(int p=0;p<50;p++){
-							information += Ganre[ganrenum/100-1]+"��"+main.select("div.wrap_song_info").select("div.ellipsis.rank01").get(p).text()+"��"+
-									main.select("div.wrap_song_info").select("div.ellipsis.rank02").select("span.checkEllipsis").get(p).text()+"��"+
+							information += Ganre[ganrenum/100-1]+"��"+main.select("div.wrap_song_info").select("div.ellipsis.rank01").get(p).text()+"��"+
+									main.select("div.wrap_song_info").select("div.ellipsis.rank02").select("span.checkEllipsis").get(p).text()+"��"+
 									main.select("div.wrap_song_info").select("div.ellipsis.rank03").get(p).text()+"\r\n";
 						}
 						fw.write(information);

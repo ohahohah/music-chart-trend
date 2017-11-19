@@ -9,10 +9,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-/* 
-		Melon Site Crawling
+/**
+* <pre>
+* 1. 패키지명 : com.ankus
+* 2. 타입명 : GaonCrawler.java
+* 3. 작성일 : 2017. 11. 20. 오전 1:24:47
+* 4. 작성자 : mypc
+* 5. 설명 : 가온 사이트 크롤러
+* </pre>
 */
-
 public class GaonCrawler {
 	public static void main(String[] args){
 		try {
@@ -26,6 +31,7 @@ public class GaonCrawler {
 			int status = ok;
 			Connection.Response response = null;
 			Document doc = null;
+			// change file route
 			String fileName = "D:\\gaonchart3.txt";
 			String information = "";
 			File file = new File(fileName);
@@ -42,8 +48,8 @@ public class GaonCrawler {
 					Boolean lml = main.select("td.subject").first().getElementsByTag("p").isEmpty();
 					if( lml!=true){
 						for(int p=0;p<100;p++){
-							information += (p+1)+"��"+main.select("td.subject").get(p).getElementsByTag("p").get(0).text()+"��"+
-									main.select("td.subject").get(p).getElementsByTag("p").get(1).text()+"��"+
+							information += (p+1)+"��"+main.select("td.subject").get(p).getElementsByTag("p").get(0).text()+"��"+
+									main.select("td.subject").get(p).getElementsByTag("p").get(1).text()+"��"+
 									main.select("td.count").get(p).getElementsByTag("p").text()+"\r\n";
 						}
 						fw.write(information);

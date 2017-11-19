@@ -1,7 +1,17 @@
-package com.song;
+package com.ankus;
 
 
 import org.apache.hadoop.io.Text;
+
+/**
+* <pre>
+* 1. 패키지명 : com.ankus
+* 2. 타입명 : GaonParser.java
+* 3. 작성일 : 2017. 11. 20. 오전 1:13:04
+* 4. 작성자 : mypc
+* 5. 설명 : 가온 차트 파싱
+* </pre>
+*/
 
 public class GaonParser {
 	private String album;
@@ -31,7 +41,7 @@ public class GaonParser {
   }
   public GaonParser(Text text,int i) {
 	    try {
-	      String[] colums = text.toString().split("ㅒ");
+	      String[] colums = text.toString().split("�뀙");
 
 	          if (colums != null && colums.length > 0) {
 	        	  
@@ -43,7 +53,7 @@ public class GaonParser {
 	      System.out.println("Error parsing a record :" + e.getMessage());
 	    }
 	  }
-  public String getsell() {
+  	public String getsell() {
 		return sell[0];
 	}
 

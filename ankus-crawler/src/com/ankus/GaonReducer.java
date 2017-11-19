@@ -1,5 +1,5 @@
 
-package com.song;
+package com.ankus;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -7,10 +7,17 @@ import org.apache.hadoop.io.Text;
 
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+* <pre>
+* 1. 패키지명 : com.ankus
+* 2. 타입명 : GaonReducer.java
+* 3. 작성일 : 2017. 11. 20. 오전 1:13:15
+* 4. 작성자 : mypc
+* 5. 설명 : 가온 차트 리듀서
+* </pre>
+*/
 public class GaonReducer extends Reducer<Text, Text, Text, Text> {
-  // 출력키
   private Text outputKey = new Text();
-  // 출력값
   private Text outputValue = new Text();
   
   private int temp;
@@ -18,7 +25,7 @@ public class GaonReducer extends Reducer<Text, Text, Text, Text> {
     throws IOException, InterruptedException {
 
     Iterator<Text> iterator = values.iterator();
-    outputKey.set(key+"ㅒ");
+    outputKey.set(key+"�뀙");
     Text info = new Text(iterator.next());	// input[0] 
     temp = Integer.parseInt(info.toString().trim());
 
@@ -26,13 +33,13 @@ public class GaonReducer extends Reducer<Text, Text, Text, Text> {
     	Text record = iterator.next();							// input[1]
     	if(temp<Integer.parseInt(record.toString().trim())){
     			temp = Integer.parseInt(record.toString().trim());
-    		}
     	}
+    }
     outputValue.set(String.format("%d", temp));
     context.write(outputKey, outputValue);
     temp = 0;
   }  
-  }
+ }
   
   
   

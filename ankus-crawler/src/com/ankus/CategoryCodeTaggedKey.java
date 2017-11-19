@@ -1,4 +1,4 @@
-package com.song;
+package com.ankus;
 
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableUtils;
@@ -7,19 +7,25 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+
+/**
+* <pre>
+* 1. 패키지명 : com.ankus
+* 2. 타입명 : CategoryCodeTaggedKey.java
+* 3. 작성일 : 2017. 11. 20. 오전 1:25:12
+* 4. 작성자 : mypc
+* 5. 설명 : 복합키 구성
+* </pre>
+*/
 public class CategoryCodeTaggedKey implements WritableComparable<CategoryCodeTaggedKey> {
-  // 항공사 코드
   private String categorycode;
-  // 조인 테그
   private Integer tag;
-  //private String major;
 
   public CategoryCodeTaggedKey() {}
 
   public CategoryCodeTaggedKey(String categorycode, int tag) {
     this.categorycode = categorycode;
     this.tag = tag;
-    //this.major = major;
   }
 
   public String getcategorycode() {
@@ -29,9 +35,6 @@ public class CategoryCodeTaggedKey implements WritableComparable<CategoryCodeTag
   public Integer getTag() {
     return tag;
   }
- // public String getmajor(){
-//	  return major;
- // }
   public void setcategorycode(String categorycode) {
     this.categorycode = categorycode;
   }
@@ -39,9 +42,6 @@ public class CategoryCodeTaggedKey implements WritableComparable<CategoryCodeTag
   public void setTag(Integer tag) {
     this.tag = tag;
   }
- // public void setmajor(String major){
-	//  this.major = major;
-  //}
   public int compareTo(CategoryCodeTaggedKey key) {
     int result = this.categorycode.compareTo(key.categorycode);
 
@@ -55,12 +55,10 @@ public class CategoryCodeTaggedKey implements WritableComparable<CategoryCodeTag
   public void write(DataOutput out) throws IOException {
     WritableUtils.writeString(out, categorycode);
     out.writeInt(tag);
-   // WritableUtils.writeString(out, major);
   }
 
   public void readFields(DataInput in) throws IOException {
 	  categorycode = WritableUtils.readString(in);
     tag = in.readInt();
-    //major = WritableUtils.readString(in);
   }
 }

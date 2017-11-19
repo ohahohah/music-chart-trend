@@ -1,5 +1,5 @@
 
-package com.song;
+package com.ankus;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -7,10 +7,17 @@ import org.apache.hadoop.io.Text;
 
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+* <pre>
+* 1. 패키지명 : com.ankus
+* 2. 타입명 : MnetReducer.java
+* 3. 작성일 : 2017. 11. 20. 오전 1:26:50
+* 4. 작성자 : mypc
+* 5. 설명 : 엠넷 차트 리듀서
+* </pre>
+*/
 public class MnetReducer extends Reducer<Text, Text, Text, Text> {
-  // 출력키
   private Text outputKey = new Text();
-  // 출력값
   private Text outputValue = new Text();
   
   private String temp="";
@@ -18,10 +25,10 @@ public class MnetReducer extends Reducer<Text, Text, Text, Text> {
     throws IOException, InterruptedException {
 
     Iterator<Text> iterator = values.iterator();
-    outputKey.set(key+"ㅒ");
+    outputKey.set(key+"��");
 
     while (iterator.hasNext()) {
-    	Text record = iterator.next();							// input[1]
+    	Text record = iterator.next();
     	temp += record.toString().trim();
     	}
     outputValue.set(temp);
