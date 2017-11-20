@@ -9,10 +9,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-/* 
-		Mnet Site Crawling
-*/
 
+
+/**
+* <pre>
+* 1. 패키지명 : com.ankus
+* 2. 타입명 : MnetCrawler.java
+* 3. 작성일 : 2017. 11. 20. 오전 1:26:25
+* 4. 작성자 : mypc
+* 5. 설명 : 엠넷 차트 크롤러
+* </pre>
+*/
 public class MnetCrawler {
 	public static void main(String[] args){
 		try {
@@ -44,8 +51,8 @@ public class MnetCrawler {
 						Boolean lml = main.select("div.MMLITitleSong_Box").first().getElementsByTag("a").isEmpty();
 						if( lml!=true){
 							for(int p=0;p<50;p++){
-								information += (p+1+(flag-1)*50)+"��"+year+String.format("%04d",page)+"��"+main.select("div.MMLITitleSong_Box").get(p).select("a.MMLI_Song").text()+"��"+
-												main.select("div.MMLITitle_Info").get(p).select("a.MMLIInfo_Artist").text()+"��"+
+								information += (p+1+(flag-1)*50)+"��"+year+String.format("%04d",page)+"��"+main.select("div.MMLITitleSong_Box").get(p).select("a.MMLI_Song").text()+"��"+
+												main.select("div.MMLITitle_Info").get(p).select("a.MMLIInfo_Artist").text()+"��"+
 												main.select("div.MMLITitle_Info").get(p).select("a.MMLIInfo_Album").text()+"\r\n";
 							}
 							fw.write(information);
